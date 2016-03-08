@@ -54,4 +54,4 @@ RUN sed -i 's/deb\ \(http.*\)\ \(.*\n\)/deb\ http\:\/\/nl\.archive\.ubuntu\.com\
 ADD test/*.sh /tmp/
 
 # Add updating the mirror repo to crontab, it runs everynight at 01.05
-RUN (crontab -l; echo "5 1 * * * apt-mirror	/usr/bin/apt-mirror > /var/spool/apt-mirror/var/cron.log")|crontab -
+RUN (crontab -l; echo "5 1 * * * apt-mirror	/usr/bin/apt-mirror > /var/spool/apt-mirror/var/cron.log && for file in `find /mnt/mirror -name Release`;do sh /tmp/verify.sh $file md5 sha1;done")|crontab -
