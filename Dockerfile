@@ -30,6 +30,9 @@ RUN lighttpd-enable-mod evasive
 # Add mod_evasive to the config
 RUN echo "evasive.max-conns-per-ip = 10" >> /etc/lighttpd/lighttpd.conf
 
+# Enable global dir listing for lighty
+RUN echo "dir-listing.activate = \"enable\"" >> /etc/lighttpd/lighttpd.conf
+
 # Now we add the RFC1918 ranges to the whitelisting in lighttpd
 # 172.16.0.0/20, 192.168.0.0/16, 10.0.0.0/24 ranges
 RUN echo "\$HTTP[\"remoteip\"] !~ \"192.168.*.*|10.0.0.*\" {\n\turl.access-deny = ( \"\" )\n\t" >> /etc/lighttpd/lighttpd.conf
