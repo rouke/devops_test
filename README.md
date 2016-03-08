@@ -6,10 +6,11 @@ Assumptions :
 * /mnt/mirror is provisioned by the orchestrator
 * /mnt/mirror has enough space
 
-Access to the repo is limited as  per spec to RFC1918 subnets.
+Access to the repo is limited as per spec to RFC1918 subnets.
+Repo is hosted on port 80, exposure is up to the host.
 
 Used components :
- * dockerhub ubuntu:trusty image
+ * dockerhub ubuntu:trusty (14.04) image
  * apt-mirror
  * lighttpd
  * http://nl.archive.ubuntu.com/ubuntu (trusty flavour) as source repo
@@ -18,3 +19,5 @@ Used components :
   - use the list to check if the specced file is there and verify its hash
   - verification output is posted in the webserver root
   - Additional actions can be added to the test/verify.sh script, i.e. removal of mismatching packages
+
+Start the container with /tmp/start.sh
