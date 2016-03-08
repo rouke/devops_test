@@ -33,7 +33,7 @@ RUN echo "evasive.max-conns-per-ip = 10" >> /etc/lighttpd/lighttpd.conf
 # Now we add the RFC1918 ranges to the whitelisting in lighttpd
 # 172.16.0.0/20, 192.168.0.0/16, 10.0.0.0/24 ranges
 RUN echo "\$HTTP[\"remoteip\"] !~ \"192.168.*.*|10.0.0.*\" {\n\turl.access-deny = ( \"\" )\n\t" >> /etc/lighttpd/lighttpd.conf
-RUN echo "\$HTTP[\"remoteip\"]\t  != \"172.16.0.0/20\" {\n\turl.access-deny = ( \"\" )\n\t}}" >> /etc/lighttpd/lighttpd.conf
+RUN echo "\$HTTP[\"remoteip\"]\t  != \"172.16.0.0/20\" {\n\turl.access-deny = ( \"\" )\n\t}\n}" >> /etc/lighttpd/lighttpd.conf
 
 # Exposing the mirror repo to lighttpd
 RUN ln -s /mnt/mirror /var/www/
