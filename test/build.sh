@@ -29,6 +29,12 @@ case $1 in
 	;;
 	push*)
 	docker push ddy:$tag
+	;;
+	all*)
+	$0 test
+	$0 build
+	$0 push
+	;;
 	*)
 	echo "Usage :\n\ttest : testing the apt-mirror with a replacement .list\n\tbuild : build docker image and push\n"
 	exit 0

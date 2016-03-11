@@ -6,7 +6,7 @@ before_script:
   - export JIRA_ISSUE=`git log --pretty="%s" $TRAVIS_COMMIT_RANGE|sed -n 's/.*\(DDY-[0-9]*\)\ .*/\1/p'`
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - cd $TRAVIS_BUILD_DIR
-script: test/build.sh $TRAVIS_BUILD_NUMBER
+script: test/build.sh test DDY $TRAVIS_BUILD_NUMBER
 notifications:
   webhooks:
   - https://zapier.com/hooks/catch/3qvzb9/
