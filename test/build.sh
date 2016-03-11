@@ -6,9 +6,10 @@
 # Supposed to run on travis-ci
 
 set -e
-i
+
 # Name
-name==$2
+name=$2
+
 # If there's a tag, set it, otherwise make the built image sortable with epoch tag
 tag=${3-$e_date}
 
