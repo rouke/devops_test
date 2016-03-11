@@ -51,7 +51,7 @@ RUN ln -s /mnt/mirror /var/www/
 RUN sed -i 's/deb\ \(http.*\)\ \(.*\n\)/deb\ http\:\/\/nl\.archive\.ubuntu\.com\/ubuntu\ \2/g' /etc/apt/mirror.list
 
 # Adding test file(s)
-ADD test/*.sh /tmp/
+ADD test/* /tmp/
 
 # Adding stratup script
 ADD start.sh /tmp/
