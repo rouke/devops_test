@@ -7,7 +7,7 @@ before_script:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - cd $TRAVIS_BUILD_DIR
   - pwd
-script: build.sh all ddy $TRAVIS_BUILD_NUMBER
+script: sh build.sh all ddy $TRAVIS_BUILD_NUMBER
 notifications:
   webhooks:
   - https://zapier.com/hooks/catch/3qvzb9/
