@@ -14,14 +14,14 @@ RUN mkdir -p /mnt/mirror
 RUN ln -s /mnt/mirror /var/spool/apt-mirror/
 
 # Build apt-cache
-RUN apt-get update -qq
+RUN apt-get -qq update
 
 # Install apt-mirror
-RUN apt-get install -yqq apt-mirror
+RUN apt-get -qq install -y apt-mirror
 
 # Install lighttpd for serving the packages
 # Lighttpd has rate limiting capabilities, we're using them to restrict reqs to 10 per client per sec
-RUN apt-get install -yqq lighttpd
+RUN apt-get -qq install -y lighttpd
 
 # Enabling evasive mod we're using to throttle client access
 RUN lighttpd-enable-mod evasive
