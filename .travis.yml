@@ -14,16 +14,16 @@ notifications:
 after_script:
   -  if [ "$JIRA_ISSUE" ]
 	then
-	curl -s -D- \
-                -u $JIRA_USER:$JIRA_PASS \
-                -X POST \
-                -H 'Content-Type:application/json' \
-                -d "{\"body\":\"Travis-ci build finished. Available at https://travis-ci.org/rouke/devops_test/builds/$TRAVIS_BUILD_ID\"}" \
+	curl -s -D- 
+                -u $JIRA_USER:$JIRA_PASS 
+                -X POST 
+                -H 'Content-Type:application/json' 
+                -d "{\"body\":\"Travis-ci build finished. Available at https://travis-ci.org/rouke/devops_test/builds/$TRAVIS_BUILD_ID\"}" 
                 http://jira.devops-ddy.ml/rest/api/2/issue/$JIRA_ISSUE/comment
-	curl -s -D- \
-                -u $JIRA_USER:$JIRA_PASS \
-                -X POST \
-                -H 'Content-Type:application/json' \
-                -d "{\"body\":\"{\"update\":{\"fields\":{\"labels\":[\"$TRAVIS_BUILD_NUMBER\"]}}" \
+	curl -s -D- 
+                -u $JIRA_USER:$JIRA_PASS 
+                -X POST 
+                -H 'Content-Type:application/json' 
+                -d "{\"body\":\"{\"update\":{\"fields\":{\"labels\":[\"$TRAVIS_BUILD_NUMBER\"]}}" 
                 http://jira.devops-ddy.ml/rest/api/2/issue/$JIRA_ISSUE/editmeta
       fi
