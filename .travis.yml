@@ -6,22 +6,23 @@ before_script:
   - export JIRA_ISSUE=`git log --pretty="%s" $TRAVIS_COMMIT_RANGE|sed -n 's/.*\(DDY-[0-9]*\)\ .*/\1/p'`
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - cd $TRAVIS_BUILD_DIR
+  - pwd
 script: build.sh all ddy $TRAVIS_BUILD_NUMBER
 notifications:
   webhooks:
   - https://zapier.com/hooks/catch/3qvzb9/
 after_script:
-  -  if [ "$JIRA_ISSUE" ]
-      then curl -s -D- 
-                -u $JIRA_USER:$JIRA_PASS 
-                -X POST 
-                -H 'Content-Type:application/json' 
-                -d "{\"body\":\"Travis-ci build finished. Available at https://travis-ci.org/rouke/devops_test/builds/$TRAVIS_BUILD_ID\"}" 
+  -  if [ "$JIRA_ISSUE" ];then
+	curl -s -D \- 
+                -u $JIRA_USER:$JIRA_PASS \
+                -X POST \
+                -H 'Content-Type:application/json' \
+                -d "{\"body\":\"Travis-ci build finished. Available at https://travis-ci.org/rouke/devops_test/builds/$TRAVIS_BUILD_ID\"}" \
                 http://jira.devops-ddy.ml/rest/api/2/issue/$JIRA_ISSUE/comment
-            curl -s -D- 
-                -u $JIRA_USER:$JIRA_PASS 
-                -X POST 
-                -H 'Content-Type:application/json' 
-                -d "{\"body\":\"{\"update\":{\"fields\":{\"labels\":[\"1.0.$TRAVIS_BUILD_NUMBER\"]}}" 
+	curl -s -D- \
+                -u $JIRA_USER:$JIRA_PASS \
+                -X POST \
+                -H 'Content-Type:application/json' \
+                -d "{\"body\":\"{\"update\":{\"fields\":{\"labels\":[\"$TRAVIS_BUILD_NUMBER\"]}}" \
                 http://jira.devops-ddy.ml/rest/api/2/issue/$JIRA_ISSUE/editmeta
       fi
