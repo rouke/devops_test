@@ -12,8 +12,9 @@ notifications:
   webhooks:
   - https://zapier.com/hooks/catch/3qvzb9/
 after_script:
-  -  if [ "$JIRA_ISSUE" ];then
-	curl -s -D \- 
+  -  if [ "$JIRA_ISSUE" ]
+	then
+	curl -s -D- \
                 -u $JIRA_USER:$JIRA_PASS \
                 -X POST \
                 -H 'Content-Type:application/json' \
