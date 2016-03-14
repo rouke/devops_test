@@ -8,7 +8,8 @@
 set -e
 
 # Name
-name=${2-ddy}
+def_name=devops-ddy
+name=${2-$def_name}
 
 # If there's a tag, set it, otherwise make the built image sortable with epoch tag
 tag=${3-$e_date}
@@ -16,10 +17,10 @@ tag=${3-$e_date}
 case $1 in
 	build*)
 	e_date=`date +"%s"`
-	docker build -t $name:$tag .
+	docker build -t rdejong/$name:$tag .
 	;;
 	push*)
-	docker push ddy:$tag
+	docker push rdejong/$name:$tag
 	;;
 	test*)
 	docker run --rm $name:$tag "/tmp/test.sh"
