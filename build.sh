@@ -17,9 +17,10 @@ tag=${3-$e_date}
 case $1 in
 	build*)
 	e_date=`date +"%s"`
-	docker build -t rdejong/$name:$tag .
+	docker build -t $name:$tag .
 	;;
 	push*)
+	docker tag $name:$tag rdejong/devops-ddy
 	docker push rdejong/$name:$tag
 	;;
 	test*)

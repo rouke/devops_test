@@ -17,11 +17,11 @@ RUN ln -s /mnt/mirror /var/spool/apt-mirror/
 RUN apt-get update -qq
 
 # Install apt-mirror
-RUN apt-get install -qq -y apt-mirror
+RUN apt-get install -yqq apt-mirror
 
 # Install lighttpd for serving the packages
-# Lighttpd has rate limiting capabilities, we're using them to restrict 
-RUN apt-get install -qq -y lighttpd
+# Lighttpd has rate limiting capabilities, we're using them to restrict reqs to 10 per client per sec
+RUN apt-get install -yqq lighttpd
 
 # Enabling evasive mod we're using to throttle client access
 RUN lighttpd-enable-mod evasive
@@ -50,10 +50,10 @@ RUN ln -s /mnt/mirror /var/www/
 RUN sed -i 's/deb\ \(http.*\)\ \(.*\n\)/deb\ http\:\/\/nl\.archive\.ubuntu\.com\/ubuntu\ \2/g' /etc/apt/mirror.list
 
 # Adding test file(s)
-ADD test/* /tmp/
+COPY test/* /tmp/
 
 # Adding stratup script
-ADD start.sh /tmp/
+COPY *.sh /tmp/
 
 # Add updating the mirror repo to crontab, it runs everynight at 01.05
 RUN (crontab -l; echo '5 1 * * * apt-mirror	/usr/bin/apt-mirror > /var/spool/apt-mirror/var/cron.log && for file in `find /mnt/mirror -name Release`;do sh /tmp/verify.sh $file md5 sha1;done')|crontab -
