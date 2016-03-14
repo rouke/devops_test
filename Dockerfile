@@ -17,12 +17,11 @@ RUN ln -s /mnt/mirror /var/spool/apt-mirror/
 RUN apt-get update -qq
 
 # Install apt-mirror
-RUN apt-get update
-RUN apt-get install -y apt-mirror
+RUN apt-get install -qq -y apt-mirror
 
 # Install lighttpd for serving the packages
 # Lighttpd has rate limiting capabilities, we're using them to restrict 
-RUN apt-get install -y lighttpd
+RUN apt-get install -qq -y lighttpd
 
 # Enabling evasive mod we're using to throttle client access
 RUN lighttpd-enable-mod evasive

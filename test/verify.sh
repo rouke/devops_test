@@ -40,7 +40,6 @@ tail -n+$(expr `grep -n "$begin_str" $rel_file|cut -f1 -d:` + 1) $rel_file \
 		echo "End string reached, exiting.."
 		exit 0
 	fi
-#	echo "Line is $line"
 	checksum=`echo $line|awk '{print $1}'`
 	file="$root_path/"`echo $line|awk '{print $3}'`
 	if [ -e $file ]; then
