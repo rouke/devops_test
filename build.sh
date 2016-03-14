@@ -31,9 +31,7 @@ case $1 in
 	fi
 	;;
 	all*)
-	$0 build
-	$0 test
-	$0 push
+	$0 build && $0 test && $0 push
 	;;
 	*)
 	echo -e "Usage :\n\tbuild : build docker image\n\tpush : push built image to dockerhub repo\n\ttest : run the created image with the testing script\n\tall : first build, test, then push\n\tArgs available : <build,push,test,all> <name (defaults to ddy)> <tag (defaults to epoch)>"
