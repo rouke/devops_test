@@ -46,6 +46,10 @@ RUN echo "}\n}\n}\n" >> /etc/lighttpd/lighttpd.conf
 # Exposing the mirror repo to lighttpd
 RUN ln -s /mnt/mirror /var/www/
 
+# Adding volume for persistent (?) repo data,
+# after all file ops so they persist
+VOLUME /mnt/mirror
+
 # In place replacement of the source hostnames
 RUN sed -i 's/deb\ \(http.*\)\ \(.*\n\)/deb\ http\:\/\/nl\.archive\.ubuntu\.com\/ubuntu\ \2/g' /etc/apt/mirror.list
 
